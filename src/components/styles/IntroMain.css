@@ -1,0 +1,154 @@
+@font-face {
+  font-family: "Buster";
+  src: url("../../../public/fonts/BusterTypeface-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+.mainBody {
+  flex: 1 ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 8%;
+  gap: 10vw;
+}
+.mainContent {
+  flex: 1;
+}
+
+.intro-title {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.349);
+  backdrop-filter: blur(4px);
+  border: solid rgba(255, 255, 255, 0.377) 0.3px ;
+  border-radius: 18px;
+  padding: 22px 24px;
+  overflow: hidden;
+  gap: 18px;
+}
+
+.intro-title p {
+  font-size: 20px;
+}
+.shop {
+  width: fit-content;
+  background-color: #ff002bb9;
+  backdrop-filter: blur(1px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 13px;
+  border: solid rgba(255, 255, 255, 0.753) 1px;
+  transition: filter 0.28s ease-out, transform 0.28s ease-out;
+  will-change: transform, filter;
+}
+.shop:hover {
+  filter: drop-shadow(0 0 1.2em #ff002bd3);
+  transition: filter 0.28s ease-in, transform 0.38s ease-in;
+  transform: scale(1.025);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading>h1 {
+  font-family: "Buster";
+  font-size: 93px;
+}
+
+.heading .logo {
+  width: 115px;
+  margin-right: 12px;
+  transition: filter 0.28s ease-out;
+}
+.heading .logo:hover {
+  filter: drop-shadow(0 0 1.2em #ff002bd3);
+  transition: filter 0.38s ease-in;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.349);
+  backdrop-filter: blur(4px);
+  border: solid rgba(255, 255, 255, 0.377) 0.3px ;
+  border-radius: 18px;
+  padding: 12px 12px;
+  overflow: hidden;
+}
+
+.contactTag {
+  display: flex;
+  align-items: center;
+  padding: 6px 4%;
+  font-size: 20px;
+  font-weight: 500;
+  gap: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: background-color 0.15s ease-in;
+}
+.contactTag:hover {
+  background-color: rgba(196, 196, 196, 0.705);
+  transition: background-color 0.15s ease-out;
+}
+.contactTag:visited {
+  color: white;
+}
+
+.fastNavigation {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.349);
+  backdrop-filter: blur(4px);
+  border: solid rgba(255, 255, 255, 0.377) 0.3px ;
+  border-radius: 18px;
+  flex: 0.6;
+  padding: 22px 24px; 
+  gap: 16px;
+}
+
+.fastNavigation > h2{
+    font-size: 32px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1vw;
+    gap: 16px;
+}
+
+.categorie {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border: solid rgba(255, 255, 255, 0.685) 1px;
+    backdrop-filter: blur(20px);
+    background-color: rgba(0, 0, 0, 0.349);
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: background-color 0.15s ease-in, transform 0.15s ease-in;
+    will-change: background-color, transform;
+}
+
+.categorie:hover {
+    background-color: rgba(196, 196, 196, 0.527);
+    transition: background-color 0.2s ease-out, transform 0.2s ease-out;
+    transform: scale(1.045);
+}
+
+.footChanger {
+    display: flex;  
+    justify-content: center;
+    font-size: 18px;
+}
+

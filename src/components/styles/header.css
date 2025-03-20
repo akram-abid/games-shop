@@ -1,0 +1,46 @@
+.header {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    padding: 8px 8px 0px 8px;
+  }
+  
+  .logo {
+    width: 70px;
+  }
+  
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .searchBar {
+    display: flex;
+    width: 30%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.349);
+    padding: 10px 20px;
+    border-radius: 50px;
+    height: fit-content;
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    gap: 12px;
+    transition: width 0.21s ease-out;
+    border: solid rgba(255, 255, 255, 0.377) 0.3px ;
+  }
+  
+  .searchBar:focus-within {
+    width: 40%;
+    transition: width 0.2s ease-in; 
+  }
+  
+  .search-input {
+    font-size: 19px;
+    padding: 4px 0px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+  }

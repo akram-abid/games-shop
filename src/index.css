@@ -1,0 +1,20 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: light dark;
+  color: rgb(255, 255, 255);
+  background-color: #111111;
+  width: 100%;
+  padding: 0px;
+  margin: ;
+}
+
+body {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
