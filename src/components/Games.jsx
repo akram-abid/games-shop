@@ -1,18 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindows, faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons";
-import { faLeftLong, faRightLong, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-export default function Games() {
-    const [pageNumber, setPageNumber] = useState(1);
-    const [maxPageNumber, setMaxPageNumber] = useState(1);
-    const [title, setTitle] = useState("All Games");
+export default function Games({ loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
+    
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
-        fetch(`https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a&page=${pageNumber}`, { mode: "cors" })
+        fetch(`${url}&page=${pageNumber}`, { mode: "cors" })
             .then((response) => {
                 if (response.status >= 400) {
                     throw new Error("server error");
@@ -27,24 +25,13 @@ export default function Games() {
             })
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
-    }, [pageNumber, maxPageNumber]);
-
-    const handleNextPage = () => {
-        setLoading(true)
-        setPageNumber((prev) => prev + 1);
-    };
-
-    const handlePrevPage = () => {
-        setLoading(true)
-        setPageNumber((prev) => (prev > 1 ? prev - 1 : 1));
-    };
+    }, [pageNumber, maxPageNumber, url]);
 
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
 
     return (
         <>
-            <h1>{title}</h1>
             <div className="games">
                 {data.map((value) => (
                     <div className="game" key={value.id}>
@@ -68,15 +55,6 @@ export default function Games() {
                         </div>
                     </div>
                 ))}
-            </div>
-            <div className="page">
-                <button onClick={handlePrevPage} disabled={pageNumber === 1} >
-                    <FontAwesomeIcon icon={faLeftLong} />
-                </button>
-                <h3>{pageNumber} / {maxPageNumber}</h3>
-                <button onClick={handleNextPage}>
-                    <FontAwesomeIcon icon={faRightLong} disabled={pageNumber === maxPageNumber} />
-                </button>
             </div>
         </>
     );

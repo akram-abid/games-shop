@@ -10,6 +10,7 @@
     margin-top: 8px;
     overflow-x: hidden;
     padding: 0px 0px 0px 12px;
+
 }
 
 ::-webkit-scrollbar {
@@ -143,20 +144,21 @@
     transition: background-color 0.2s ease-out, transform 0.2s ease-out;
     transform: scale(1.045);
 }
+
 .page {
-    position: sticky;
+    position: fixed; /* Change from sticky to fixed */
     backdrop-filter: blur(7px);
     display: flex;
     gap: 8px;
-    width: 100%;
+    width: calc(100% - 20% - 60px);
     align-items: center;
+    left: calc(20% + 12px + 28px);
     background: linear-gradient(
         90deg, 
         rgba(255,255,255,0) 0%, 
         #000000bd 50%, 
         rgba(255,255,255,0) 100%
     );
-    /* Add horizontal fade mask for both sides */
     mask-image: linear-gradient(
         to right, 
         transparent 0%, 
@@ -175,6 +177,7 @@
     justify-content: center;
     padding: 8px;
     font-size: 16px;
+    z-index: 100;
 }
 
 .page button {
