@@ -35,6 +35,7 @@ export default function Shop(){
                 <div className="games-layout">
                     <Games />
                 </div>
+                
             </div>
         </>
     );

@@ -20,11 +20,12 @@
     display: flex;
     flex-direction: column;
     grid-area: games;
+    position: relative;
 }
 
 .games-layout > h1 {
     color: #ec1b3e;
-    font-size: 60px;
+    font-size: 50px;
     padding: 4px 8px;
 }
 
@@ -35,6 +36,7 @@
     gap: 18px;
     overflow-y: auto;
     overflow-x: auto;
+    height: 100%;
 }
 .nav-bar {
     padding-top: 22px;
@@ -141,4 +143,40 @@
     transition: background-color 0.2s ease-out, transform 0.2s ease-out;
     transform: scale(1.045);
 }
+.page {
+    position: sticky;
+    backdrop-filter: blur(7px);
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    background: linear-gradient(
+        90deg, 
+        rgba(255,255,255,0) 0%, 
+        #000000bd 50%, 
+        rgba(255,255,255,0) 100%
+    );
+    /* Add horizontal fade mask for both sides */
+    mask-image: linear-gradient(
+        to right, 
+        transparent 0%, 
+        black 20%, 
+        black 80%, 
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right, 
+        transparent 0%, 
+        black 20%, 
+        black 80%, 
+        transparent 100%
+    );
+    bottom: 0;
+    justify-content: center;
+    padding: 8px;
+    font-size: 16px;
+}
 
+.page button {
+    padding: 4px;
+}
