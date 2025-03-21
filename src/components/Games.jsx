@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function Games() {
     const [pageNumber, setPageNumber] = useState(1);
     const [maxPageNumber, setMaxPageNumber] = useState(1);
-    const [title, setTitle] = useState("Most Popular");
+    const [title, setTitle] = useState("All Games");
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
