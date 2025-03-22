@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWindows, faXbox, faPlaystation } from "@fortawesome/free-brands-svg-icons";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faWindows, faXbox, faPlaystation,faApple, faAndroid, } from "@fortawesome/free-brands-svg-icons";
+import { faBookmark, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 export default function Games({ loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
@@ -33,24 +33,44 @@ export default function Games({ loading, setLoading, pageNumber, maxPageNumber, 
     return (
         <>
             <div className="games">
-                {data.map((value) => (
-                    <div className="game" key={value.id}>
+                {data.map((game) => (
+                    <div className="game" key={game.id}>
                         <div className="game-content">
-                            <img src={value.background_image} alt={value.name} className="game-bg" />
+                            <img src={game.background_image} alt={game.name} className="game-bg" />
                             <div className="infos">
                                 <div className="cart">
                                     <button className="addToCart">Add to cart +</button>
-                                    <h3>{hashStringToNumber(value.name) + " $"}</h3>
+                                    <h3>{hashStringToNumber(game.name) + " $"}</h3>
                                 </div>
                                 <div className="save">
                                     <div className="brands">
-                                        <FontAwesomeIcon icon={faWindows} />
-                                        <FontAwesomeIcon icon={faPlaystation} />
-                                        <FontAwesomeIcon icon={faXbox} />
+                                        {game.parent_platforms && game.parent_platforms.some(platform => 
+                                            platform.platform.slug === 'pc'
+                                        ) && <FontAwesomeIcon icon={faWindows} />}
+                                        
+                                        {game.parent_platforms && game.parent_platforms.some(platform => 
+                                            platform.platform.slug === 'playstation'
+                                        ) && <FontAwesomeIcon icon={faPlaystation} />}
+                                        
+                                        {game.parent_platforms && game.parent_platforms.some(platform => 
+                                            platform.platform.slug === 'xbox'
+                                        ) && <FontAwesomeIcon icon={faXbox} />}
+                                        
+                                        {game.parent_platforms && game.parent_platforms.some(platform => 
+                                            platform.platform.slug === 'ios' || platform.platform.slug === 'mac'
+                                        ) && <FontAwesomeIcon icon={faApple} />}
+                                        
+                                        {game.parent_platforms && game.parent_platforms.some(platform => 
+                                            platform.platform.slug === 'android'
+                                        ) && <FontAwesomeIcon icon={faAndroid} />}
+                                        
+                                        {game.parent_platforms && game.parent_platforms.some(platform => 
+                                            platform.platform.slug === 'nintendo'
+                                        ) && <FontAwesomeIcon icon={faGamepad} />}
                                     </div>
                                     <FontAwesomeIcon icon={faBookmark} />
                                 </div>
-                                <h2>{value.name}</h2>
+                                <h2>{game.name}</h2>
                             </div>
                         </div>
                     </div>
@@ -59,7 +79,6 @@ export default function Games({ loading, setLoading, pageNumber, maxPageNumber, 
         </>
     );
 }
-
 function hashStringToNumber(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
