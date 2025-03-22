@@ -7,7 +7,6 @@ export default function Games({ loading, setLoading, pageNumber, maxPageNumber, 
     
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
-    
 
     useEffect(() => {
         fetch(`${url}&page=${pageNumber}`, { mode: "cors" })

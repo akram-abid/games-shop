@@ -1,11 +1,10 @@
 import Header from './Header';
 import './styles/shop.css'
-import { useState } from 'react';
+import { useState} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeftLong, faRightLong} from "@fortawesome/free-solid-svg-icons";
-//import { faChartSimple, faFire, faStar, faFlagCheckered, faMeteor, faGlobe} from "@fortawesome/free-solid-svg-icons";
+import { faLeftLong, faRightLong,} from "@fortawesome/free-solid-svg-icons";
 import Games from './Games';
-import { categories } from '../data/data';
+import { categories, genres } from '../data/data';
 
 
 export default function Shop(){
@@ -41,9 +40,25 @@ export default function Shop(){
                         <FontAwesomeIcon icon={value.icon} size='2x'/>
                         <h2>{ value.name }</h2>
                     </div>
-                )}) }   
+                )}) }  
                 </div>
                 <div className="games-layout">
+                    <div className="genres">
+                        <p>Genrs</p>
+                        {genres.map((value) => {
+                            return(
+                            <div className="gener" key={value.name} onClick={ () => {
+                                setLoading(true)
+                                setUrl(`${value.url}`)
+                                setTitle(value.name)
+                                setPageNumber(1)
+                                } }>
+                                <FontAwesomeIcon icon={value.icon} size='2x'/>
+                                <h2>{ value.name }</h2>
+                            </div>
+                            )
+                        })}
+                    </div> 
                     <h1>{title}</h1>
                     <Games url={url} loading={loading} maxPageNumber={maxPageNumber} pageNumber={pageNumber} setLoading={setLoading} setMaxPageNumber={setMaxPageNumber} />
                     <div className="page">
