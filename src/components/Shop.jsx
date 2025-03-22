@@ -43,22 +43,24 @@ export default function Shop(){
                 )}) }  
                 </div>
                 <div className="games-layout">
-                    <div className="genres">
-                        <p>Genrs</p>
-                        {genres.map((value) => {
-                            return(
-                            <div className="gener" key={value.name} onClick={ () => {
-                                setLoading(true)
-                                setUrl(`${value.url}`)
-                                setTitle(value.name)
-                                setPageNumber(1)
-                                } }>
-                                <FontAwesomeIcon icon={value.icon} size='2x'/>
-                                <h2>{ value.name }</h2>
+                        <div className="genres-section">
+                            <h3>Genrs</h3>
+                            <div className="genres">
+                                {genres.map((value) => {
+                                    return(
+                                    <div className="gener" key={value.name} onClick={ () => {
+                                        setLoading(true)
+                                        setUrl(`${value.url}`)
+                                        setTitle(value.name)
+                                        setPageNumber(1)
+                                        } }>
+                                        <FontAwesomeIcon icon={value.icon} size='2x'/>
+                                        <h2>{ value.name }</h2>
+                                    </div>
+                                    )
+                                })}
                             </div>
-                            )
-                        })}
-                    </div> 
+                        </div>
                     <h1>{title}</h1>
                     <Games url={url} loading={loading} maxPageNumber={maxPageNumber} pageNumber={pageNumber} setLoading={setLoading} setMaxPageNumber={setMaxPageNumber} />
                     <div className="page">
