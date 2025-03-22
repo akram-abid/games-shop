@@ -31,16 +31,6 @@ export const categories = [
         url: `https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a`,
     },
     {
-        name: "Most Popular",
-        icon: faChartSimple,
-        url: `https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a`,
-    },
-    {
-        name: "Trending",
-        icon: faFire,
-        url: `https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a&orderinghttps://api.rawg.io/api/games/lists/main?key=c81c9ad475874d0694d4bd9a64b5bb6a&ordering=-relevance`,
-    },
-    {
         name: "Top Rated",
         icon: faStar,
         url: `https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a&ordering=-rating`,
