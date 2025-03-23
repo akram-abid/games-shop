@@ -62,7 +62,6 @@
     box-sizing: border-box;
 }
 
-
 .game-content {
     display: flex;
     flex-direction: column;
@@ -79,7 +78,7 @@
     transform: scale(1.04);
     transition: transform 0.2s ease-out;
 }
-.img, .game-bg{
+.game-bg{
     object-fit: cover;
     height: 100%;
     width: 100%;
@@ -108,10 +107,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 8px;
-}
-
-.infos > h2 {
-    padding-left: 12px;
 }
 
 .save {
@@ -168,7 +163,7 @@
     backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 6px;
     border-radius: 12px;
     width: 100%;
     box-sizing: border-box;
@@ -262,5 +257,14 @@
 }
 
 .page button {
+    background-color: #ec1b3e;
+    border: none;
+    border-radius: 2px;
     padding: 4px;
+    transition: background-color 0.12s ease-in;
+}
+
+.page button:hover {
+    background-color: #bd0b28;
+    transition: background-color 0.12s ease-out;
 }

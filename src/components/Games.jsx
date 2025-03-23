@@ -3,28 +3,7 @@ import { faWindows, faXbox, faPlaystation,faApple, faAndroid, } from "@fortaweso
 import { faBookmark, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-export default function Games({ loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
-    
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        fetch(`${url}&page=${pageNumber}`, { mode: "cors" })
-            .then((response) => {
-                if (response.status >= 400) {
-                    throw new Error("server error");
-                }
-                return response.json();
-            })
-            .then((response) => {
-                console.log("Fetched page", response);
-                setMaxPageNumber(Math.ceil(response.count/20))
-                console.log("this is th max", maxPageNumber)
-                setData(response.results);
-            })
-            .catch((error) => setError(error))
-            .finally(() => setLoading(false));
-    }, [pageNumber, maxPageNumber, url]);
+export default function Games({ error, data, loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
 
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
@@ -78,6 +57,7 @@ export default function Games({ loading, setLoading, pageNumber, maxPageNumber, 
         </>
     );
 }
+
 function hashStringToNumber(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {

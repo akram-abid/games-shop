@@ -1,6 +1,4 @@
 import {
-    faChartSimple,
-    faFire,
     faStar,
     faFlagCheckered,
     faMeteor,
