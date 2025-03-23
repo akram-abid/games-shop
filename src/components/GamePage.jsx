@@ -44,13 +44,20 @@ export default function GamePage({gameID}) {
                         <img src={image} alt="" />
                         <div className="horizontall-fade">
                             <div className="game-infos">
+                                <div className='genres-tags'>
+                                    {game.genres.map((value, index, array) => {
+                                        return(
+                                            <h4>{value.name}</h4>
+                                        );
+                                    })}
+                                </div>
                                 <h1 className='game-title'>{game.name}</h1>
                                 <p className='game-discribtion'>{ getFirstParagraph(game.description_raw) }</p>
                                 <div className="game-rating">
                                     <FontAwesomeIcon icon={faStar} color='yellow' size='2x'/>
                                     <div className='rating'>
                                         <h3>Rating</h3>
-                                        <h2>{game.rating}/5</h2>
+                                        <h2>{game.rating} /5</h2>
                                     </div>
                                 </div>
                                 <div className="add-to">
@@ -58,7 +65,12 @@ export default function GamePage({gameID}) {
                                     <button className='cart-btn'>Add to cart</button>
                                 </div>
                             </div>
-                            <div className="gameplay-shots"></div>
+                            <div className="gameplay-shots">
+                                <h2>Gameplay Shots</h2>
+                                <div className="shots">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

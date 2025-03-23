@@ -48,7 +48,7 @@ export default function Shop(){
     if (error) return <p>A network error was encountered</p>;
 
     return(
-        <GamePage gameID={data[0].id}/>
+        <GamePage gameID={data[17].id}/>
     );
 
     // return( 

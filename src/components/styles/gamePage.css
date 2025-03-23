@@ -97,17 +97,32 @@ html, body {
     justify-content: center;
     padding: 0 120px 0 60px;
     align-items: flex-start;
-    gap: 18px;
+    gap: 8px;
+}
+
+.genres-tags {
+    display: flex;
+    gap: 12px;
+}
+
+.genres-tags>h4 {
+    font-size: 12px;
+    border-radius: 50px;
+    border: solid rgba(255, 255, 255, 0.555) 1px;
+    padding: 4px 10px;
+    background-color: rgba(0, 0, 0, 0.425);
 }
 
 .game-title {
-    font-size: 66px;
+    font-size: 46px;
 }
 
 .game-discribtion {
     font-size: 19px;
-    margin-bottom: 12px;
+    margin-bottom: 22px;
     line-height: 1.3;
+    height: 200px;
+    overflow-x: auto;
 }
 
 .game-rating {
@@ -126,14 +141,11 @@ html, body {
     font-size: 24px;
 }
 
-.gameplay-shots {
-    flex: 1;
-}
-
 .add-to {
     display: flex;
     flex-direction: row;
     gap: 18px;
+    margin-top: 8px;
 }
 
 .add-to button {
@@ -171,3 +183,5 @@ html, body {
 .cart-btn:hover {
     filter: drop-shadow(0 0 1.2em #fdfdfdd3);
 }
+
+.gameplay-shots
