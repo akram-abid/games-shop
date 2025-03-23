@@ -26,6 +26,7 @@ export default function Shop(){
                 return response.json();
             })
             .then((response) => {
+                console.log("the original data is ", response)
                 setMaxPageNumber(Math.ceil(response.count/20))
                 setData(response.results);
             })
@@ -48,7 +49,7 @@ export default function Shop(){
     if (error) return <p>A network error was encountered</p>;
 
     return(
-        <GamePage gameID={data[17].id}/>
+        <GamePage gameID={data[0].id} gameScreenShots={data[0].short_screenshots}/>
     );
 
     // return( 

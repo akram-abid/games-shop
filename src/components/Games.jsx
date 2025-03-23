@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindows, faXbox, faPlaystation,faApple, faAndroid, } from "@fortawesome/free-brands-svg-icons";
 import { faBookmark, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import Brands from "./Brands";
 
 export default function Games({ error, data, loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
 
@@ -21,31 +22,7 @@ export default function Games({ error, data, loading, setLoading, pageNumber, ma
                                     <h3>{hashStringToNumber(game.name) + " $"}</h3>
                                 </div>
                                 <div className="save">
-                                    <div className="brands">
-                                        {game.parent_platforms && game.parent_platforms.some(platform => 
-                                            platform.platform.slug === 'pc'
-                                        ) && <FontAwesomeIcon icon={faWindows} />}
-                                        
-                                        {game.parent_platforms && game.parent_platforms.some(platform => 
-                                            platform.platform.slug === 'playstation'
-                                        ) && <FontAwesomeIcon icon={faPlaystation} />}
-                                        
-                                        {game.parent_platforms && game.parent_platforms.some(platform => 
-                                            platform.platform.slug === 'xbox'
-                                        ) && <FontAwesomeIcon icon={faXbox} />}
-                                        
-                                        {game.parent_platforms && game.parent_platforms.some(platform => 
-                                            platform.platform.slug === 'ios' || platform.platform.slug === 'mac'
-                                        ) && <FontAwesomeIcon icon={faApple} />}
-                                        
-                                        {game.parent_platforms && game.parent_platforms.some(platform => 
-                                            platform.platform.slug === 'android'
-                                        ) && <FontAwesomeIcon icon={faAndroid} />}
-                                        
-                                        {game.parent_platforms && game.parent_platforms.some(platform => 
-                                            platform.platform.slug === 'nintendo'
-                                        ) && <FontAwesomeIcon icon={faGamepad} />}
-                                    </div>
+                                    <Brands game={game} />
                                     <FontAwesomeIcon icon={faBookmark} />
                                 </div>
                                 <h2>{game.name}</h2>

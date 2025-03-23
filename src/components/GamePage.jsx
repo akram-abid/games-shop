@@ -3,8 +3,11 @@ import Header from './Header';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import './styles/gamePage.css'
+import Brands from './Brands';
 
-export default function GamePage({gameID}) {
+export default function GamePage({gameID, gameScreenShots}) {
+
+    console.log("i am receiving this shots hope you like it ", gameScreenShots)
 
     const [game, setGame] = useState({})
     const [error, setError] = useState(null)
@@ -47,11 +50,12 @@ export default function GamePage({gameID}) {
                                 <div className='genres-tags'>
                                     {game.genres.map((value, index, array) => {
                                         return(
-                                            <h4>{value.name}</h4>
+                                            <h4 key={value.name}>{value.name}</h4>
                                         );
                                     })}
                                 </div>
                                 <h1 className='game-title'>{game.name}</h1>
+                                <Brands game={game}/>
                                 <p className='game-discribtion'>{ getFirstParagraph(game.description_raw) }</p>
                                 <div className="game-rating">
                                     <FontAwesomeIcon icon={faStar} color='yellow' size='2x'/>
@@ -68,7 +72,13 @@ export default function GamePage({gameID}) {
                             <div className="gameplay-shots">
                                 <h2>Gameplay Shots</h2>
                                 <div className="shots">
-                                    
+                                    {gameScreenShots.map((value) => {
+                                        return(
+                                            <div className="shot" key={value.id}>
+                                                <img src={value.image} alt="shot" />
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
