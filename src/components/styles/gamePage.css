@@ -135,3 +135,39 @@ html, body {
     flex-direction: row;
     gap: 18px;
 }
+
+.add-to button {
+    padding: 4px 14px;
+    font-size: 22px;
+    width: 200px;
+    font-weight: 600;
+    border-radius:50px;
+    transition: filter 0.15s ease-in, transform 0.15s ease-in;
+    will-change: background-color, transform;
+}
+
+.add-to button:hover {
+    transition: transform 0.2s ease-out, filter 0.2s ease-in;
+    transform: scale(1.045);
+}
+
+.wish {
+    border: none;
+    background-color:#ff002bd3;
+}
+
+.wish:hover {
+    filter: drop-shadow(0 0 1.2em #ff002bd3);
+    transition: filter 0.38s ease-in;
+}
+
+.cart-btn {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: solid rgba(255, 255, 255, 0.644) 1px;
+    backdrop-filter: blur(5px);
+    transition: filter 0.2s ease-out;
+}
+
+.cart-btn:hover {
+    filter: drop-shadow(0 0 1.2em #fdfdfdd3);
+}

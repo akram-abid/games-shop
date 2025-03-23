@@ -54,8 +54,8 @@ export default function GamePage({gameID}) {
                                     </div>
                                 </div>
                                 <div className="add-to">
-                                    <button className='wish'>add to wish list</button>
-                                    <button className='cart-btn'>add to cart</button>
+                                    <button className='wish'>Add to wish list</button>
+                                    <button className='cart-btn'>Add to cart</button>
                                 </div>
                             </div>
                             <div className="gameplay-shots"></div>
