@@ -292,50 +292,47 @@ html, body {
     transition: all 0.4s ease;
 }
 
-/* Add this to your gamePage.css file */
+.shots-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
 
-.info-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .visibility-toggle {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .visibility-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .visibility-toggle.active {
-    color: #ffcc00; /* Your main color - adjust as needed */
-  }
-  
-  .game-content, .gameplay-shots {
-    transition: opacity 0.5s ease, max-height 0.5s ease, margin 0.5s ease;
-    overflow: hidden;
-  }
-  
-  .game-content.visible, .gameplay-shots.visible {
-    opacity: 1;
-    max-height: 1000px; /* Adjust based on your content height */
-    margin-bottom: 20px;
-  }
-  
-  .game-content.hidden, .gameplay-shots.hidden {
-    opacity: 0;
-    max-height: 0;
-    margin: 0;
-    padding: 0;
-  }
+.visibility-toggle {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.visibility-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.visibility-toggle.active {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* For the smooth transition of content visibility */
+.game-infos.visible,
+.shots.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.game-infos.hidden,
+.shots.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
