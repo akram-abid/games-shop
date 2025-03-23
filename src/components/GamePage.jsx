@@ -6,9 +6,8 @@ import './styles/gamePage.css'
 import Brands from './Brands';
 
 export default function GamePage({gameID, gameScreenShots}) {
-
-    console.log("i am receiving this shots hope you like it ", gameScreenShots)
-
+        
+    const [imageURL, setImageURL] = useState("")
     const [game, setGame] = useState({})
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -23,6 +22,8 @@ export default function GamePage({gameID, gameScreenShots}) {
             })
             .then((response) => {
                 console.log("the data of the game ", response)
+                setImageURL(response.background_image)
+                console.log("i wil set this image ", imageURL, response.background_image)
                 setGame(response)
                 setLoading(false)
             })
@@ -33,22 +34,44 @@ export default function GamePage({gameID, gameScreenShots}) {
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
         
-    let image = game.background_image
-
+    const onShotClick = (imageUrl) => {
+        const mainImage = document.querySelector('.content > img');
+        
+        if (imageURL !== imageUrl) {
+            mainImage.classList.add('image-changing');
+            
+            setTimeout(() => {
+                setImageURL(imageUrl);
+                
+                const tempImg = new Image();
+                tempImg.src = imageUrl;
+                
+                tempImg.onload = () => {
+                    setTimeout(() => {
+                        mainImage.classList.remove('image-changing');
+                    }, 50);
+                };
+                
+                setTimeout(() => {
+                    mainImage.classList.remove('image-changing');
+                }, 100);
+            }, 400);
+        }
+    };
     return(
         <>
             <div className="game-page">
             <Header />
-                <img src={image} alt="" />
+                <img src={imageURL} alt="" />
                 <div className="blur-layer"></div>
                 <div className="faded"></div>
                 <div className="content-container">
                     <div className="content">
-                        <img src={image} alt="" />
+                        <img src={imageURL} alt="" />
                         <div className="horizontall-fade">
                             <div className="game-infos">
                                 <div className='genres-tags'>
-                                    {game.genres.map((value, index, array) => {
+                                    {game.genres.map((value) => {
                                         return(
                                             <h4 key={value.name}>{value.name}</h4>
                                         );
@@ -74,7 +97,7 @@ export default function GamePage({gameID, gameScreenShots}) {
                                 <div className="shots">
                                     {gameScreenShots.map((value) => {
                                         return(
-                                            <div className="shot" key={value.id}>
+                                            <div className="shot" key={value.id} onClick={() => onShotClick(value.image)}>
                                                 <img src={value.image} alt="shot" />
                                             </div>
                                         );

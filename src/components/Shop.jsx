@@ -49,7 +49,7 @@ export default function Shop(){
     if (error) return <p>A network error was encountered</p>;
 
     return(
-        <GamePage gameID={data[0].id} gameScreenShots={data[0].short_screenshots}/>
+        <GamePage gameID={data[10].id} gameScreenShots={data[10].short_screenshots}/>
     );
 
     // return( 
