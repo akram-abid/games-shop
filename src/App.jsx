@@ -6,9 +6,8 @@ import Shop from './components/Shop';
 function App() {
   return (
     <>
-      <Shop />
-      {/* { <MainBackground url={"/videos/cyberpunk-skull-soldier-wallpaperwaifu-com.mp4"}/> } */}
-      {/* <IntroMain  /> */}
+      <MainBackground url={"/videos/cyberpunk-skull-soldier-wallpaperwaifu-com.mp4"}/>
+      <IntroMain  />
     </>
   );
 }

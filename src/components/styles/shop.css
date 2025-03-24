@@ -60,6 +60,8 @@
     transform-origin: center;
     padding: 10px;
     box-sizing: border-box;
+    color: white;
+    text-decoration: none;
 }
 
 .game-content {

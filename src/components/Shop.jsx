@@ -48,61 +48,61 @@ export default function Shop(){
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
 
-    return(
-        <GamePage gameID={data[10].id} gameScreenShots={data[10].short_screenshots}/>
-    );
-
-    // return( 
-    //     <>
-    //         { <Header /> }
-    //         <div className="shop-content">
-    //             <div className="nav-bar">
-    //                 <div className="categs-section">
-    //                     { categories.map( value => { return (
-    //                         <div className="categ" key={value.name} onClick={ () => {
-    //                             setLoading(true)
-    //                             setPageNumber(1)
-    //                             setTitle(value.name)
-    //                             setUrl(`${value.url}`)
-    //                             } }>
-    //                             <FontAwesomeIcon icon={value.icon} size='2x'/>
-    //                             <h2>{ value.name }</h2>
-    //                         </div>
-    //                     )}) }
-    //                 </div>
-    //                 <div className="genres-section">
-    //                     <h3>Genrs</h3>
-    //                     <div className="genres">
-    //                         {genres.map((value) => {
-    //                             return(
-    //                             <div className="gener" key={value.name} onClick={ () => {
-    //                                 setLoading(true)
-    //                                 setUrl(`${value.url}`)
-    //                                 setTitle(value.name)
-    //                                 setPageNumber(1)
-    //                                 } }>
-    //                                 <FontAwesomeIcon icon={value.icon} size='2x'/>
-    //                                 <h2>{ value.name }</h2>
-    //                             </div>
-    //                             )
-    //                         })}
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //             <div className="games-layout">
-    //                 <h1>{title}</h1>
-    //                 <Games url={url} loading={loading} maxPageNumber={maxPageNumber} pageNumber={pageNumber} setLoading={setLoading} setMaxPageNumber={setMaxPageNumber} data={data} error={error} />
-    //                 <div className="page">
-    //                     <button onClick={handlePrevPage} disabled={pageNumber === 1} >
-    //                         <FontAwesomeIcon icon={faLeftLong} />
-    //                     </button>
-    //                     <h3>{pageNumber} / {maxPageNumber}</h3>
-    //                     <button onClick={handleNextPage}>
-    //                         <FontAwesomeIcon icon={faRightLong} disabled={pageNumber === maxPageNumber} />
-    //                     </button>
-    //                  </div>
-    //             </div>
-    //         </div>
-    //     </>
+    // return(
+    //     <GamePage gameID={data[16].id} gameScreenShots={data[16].short_screenshots}/>
     // );
+
+    return( 
+        <>
+            { <Header /> }
+            <div className="shop-content">
+                <div className="nav-bar">
+                    <div className="categs-section">
+                        { categories.map( value => { return (
+                            <div className="categ" key={value.name} onClick={ () => {
+                                setLoading(true)
+                                setPageNumber(1)
+                                setTitle(value.name)
+                                setUrl(`${value.url}`)
+                                } }>
+                                <FontAwesomeIcon icon={value.icon} size='2x'/>
+                                <h2>{ value.name }</h2>
+                            </div>
+                        )}) }
+                    </div>
+                    <div className="genres-section">
+                        <h3>Genrs</h3>
+                        <div className="genres">
+                            {genres.map((value) => {
+                                return(
+                                <div className="gener" key={value.name} onClick={ () => {
+                                    setLoading(true)
+                                    setUrl(`${value.url}`)
+                                    setTitle(value.name)
+                                    setPageNumber(1)
+                                    } }>
+                                    <FontAwesomeIcon icon={value.icon} size='2x'/>
+                                    <h2>{ value.name }</h2>
+                                </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+                <div className="games-layout">
+                    <h1>{title}</h1>
+                    <Games url={url} loading={loading} maxPageNumber={maxPageNumber} pageNumber={pageNumber} setLoading={setLoading} setMaxPageNumber={setMaxPageNumber} data={data} error={error} />
+                    <div className="page">
+                        <button onClick={handlePrevPage} disabled={pageNumber === 1} >
+                            <FontAwesomeIcon icon={faLeftLong} />
+                        </button>
+                        <h3>{pageNumber} / {maxPageNumber}</h3>
+                        <button onClick={handleNextPage}>
+                            <FontAwesomeIcon icon={faRightLong} disabled={pageNumber === maxPageNumber} />
+                        </button>
+                     </div>
+                </div>
+            </div>
+        </>
+    );
 }

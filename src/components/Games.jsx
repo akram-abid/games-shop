@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWindows, faXbox, faPlaystation,faApple, faAndroid, } from "@fortawesome/free-brands-svg-icons";
-import { faBookmark, faGamepad } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import Brands from "./Brands";
 
 export default function Games({ error, data, loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
@@ -13,7 +12,7 @@ export default function Games({ error, data, loading, setLoading, pageNumber, ma
         <>
             <div className="games">
                 {data.map((game) => (
-                    <div className="game" key={game.id}>
+                    <Link className="game" key={game.id}>
                         <div className="game-content">
                             <img src={game.background_image} alt={game.name} className="game-bg" />
                             <div className="infos">
@@ -28,7 +27,7 @@ export default function Games({ error, data, loading, setLoading, pageNumber, ma
                                 <h2>{game.name}</h2>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </>

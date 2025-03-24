@@ -32,6 +32,8 @@
   font-size: 20px;
 }
 .shop {
+  text-decoration: none;
+  color: white;
   width: fit-content;
   background-color: #ff002bb9;
   backdrop-filter: blur(1px);

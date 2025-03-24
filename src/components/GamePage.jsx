@@ -74,7 +74,7 @@ export default function GamePage({gameID, gameScreenShots}) {
                 <div className="content-container">
                     <div className="content">
                         <img src={imageURL} alt="" />
-                        <div className="horizontall-fade">
+                        <div className={`horizontall-fade ${contentVisible ? '' : 'transparent'}`}>
                             <div className={`game-infos ${contentVisible ? 'visible' : 'hidden'}`}>
                                 <div className='genres-tags'>
                                     {game.genres.map((value) => {

@@ -19,6 +19,7 @@
     "lucide-react": "^0.482.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.4.0",
     "remixicon-react": "^1.0.0"
   },
   "devDependencies": {

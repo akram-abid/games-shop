@@ -1,6 +1,7 @@
 import './styles/IntroMain.css'
 import Header from './Header';
 import { ShoppingCart} from 'lucide-react';
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartSimple, faFire, faStar, faFlagCheckered, faMeteor} from "@fortawesome/free-solid-svg-icons";
 
@@ -18,10 +19,10 @@ export default function IntroMain( ) {
                     </div>
                     <p>It's just a personal project. The games cannot be bought and the prices are fake, generated to imitate a real shop.</p>
                     <h2>Enjoy the virtual shoping 😉</h2>
-                    <button className='shop'>
+                    <Link className='shop' to="shop" >
                       <ShoppingCart size={30} color="white"/>
                       <h2>Shop Now</h2>
-                    </button>
+                    </Link>
                   </div>  
                   <div className="contact">
                     <a className='contactTag' href='https://github.com/akram-abid'>
