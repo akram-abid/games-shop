@@ -1,7 +1,6 @@
 import './App.css'
 import MainBackground from "./components/MainBackground"
 import IntroMain from './components/IntroMain';
-import Cart from './components/Cart';
 
 function App() {
   console.log("retrive the try ", JSON.parse(localStorage.getItem("cart3")))

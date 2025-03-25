@@ -76,9 +76,6 @@ export default function IntroMain() {
               ))}
             </div>
           </div>
-          <div className="footChanger">
-              <h3>just trying to add something</h3>
-          </div>
         </>
     );
 }
