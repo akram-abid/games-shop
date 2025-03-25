@@ -5,8 +5,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     overflow-y: auto;
-    max-height: 80vh;  
-    width: 45%;
+    max-height: 90vh;  
+    width: 65%;
     padding: 12px 28px;
     backdrop-filter: blur(8px);
     display: flex;
@@ -14,6 +14,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    border-radius: 18px;
 }
 
 .cart-backdrop {
@@ -37,6 +38,7 @@
     cursor: pointer;
     color: white;
     font-size: 24px;
+    background-color: transparent;
 }
 
 .items {
@@ -48,22 +50,40 @@
     gap: 22px;
 }
 
+.remove-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    justify-self: end;
+}
+
 .game-item {
     display: flex;
     align-items: center;
     gap: 18px;
+    width: 100%;
 }
 
 .item-img {
     width: 35%;
     aspect-ratio: 1/1;
     background-color: blue;
+    height: 150px;
+    width: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.item-img > img {
+    object-fit: cover;
+    height: 100%;
 }
 
 .item-infos {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    flex: 1;
 }
 
 .item-infos > h3 {

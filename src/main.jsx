@@ -9,7 +9,7 @@ import Header from './components/Header';
 const router = createBrowserRouter(routes);
 
 function MainApp() {
-  const [isCartOpen, setIsCartOpen] = useState(true);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleCart = () => {
     setIsCartOpen(prev => !prev);

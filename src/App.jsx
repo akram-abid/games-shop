@@ -4,6 +4,7 @@ import IntroMain from './components/IntroMain';
 import Cart from './components/Cart';
 
 function App() {
+  console.log("retrive the try ", JSON.parse(localStorage.getItem("cart3")))
   return (
     <>
       <MainBackground url={"/videos/cyberpunk-skull-soldier-wallpaperwaifu-com.mp4"}/>

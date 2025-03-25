@@ -178,6 +178,8 @@ export default function Shop(){
                                 data={data} 
                                 error={error} 
                                 onGameClick={navigateToGame}
+                                onAddToCartClick={addItemToCart}
+                                onRemoveFromCart={onRemoveFromCart}
                             />
                             <div className="page">
                                 <button onClick={handlePrevPage} disabled={pageNumber === 1} >
@@ -201,3 +203,35 @@ function getCategoryByName(name) {
         category.name.toLowerCase().replace(/\s+/g, '-') === name
     );
 }
+
+export const addItemToCart = (id, name, price, imageUrl) => {
+    console.log("trying to read this ", JSON.parse(localStorage.getItem("cart3")));
+
+    let oldArray = JSON.parse(localStorage.getItem("cart3")) || [];
+
+    const exists = oldArray.some(item => item.id === id);
+
+    if (exists) {
+        console.log("Item already exists, doing nothing.");
+        return;
+    }
+
+    oldArray.push({ id, name, price, image: imageUrl });
+
+    localStorage.setItem("cart3", JSON.stringify(oldArray));
+
+    console.log("after editing ", JSON.parse(localStorage.getItem("cart3")));
+};
+
+export const onRemoveFromCart = (id) => {
+    let cartItems = JSON.parse(localStorage.getItem("cart3")) || [];
+
+    // Filter out the item with the given ID
+    const updatedCart = cartItems.filter(item => item.id !== id);
+
+    // Update localStorage
+    localStorage.setItem("cart3", JSON.stringify(updatedCart));
+
+    console.log("after removing item", JSON.parse(localStorage.getItem("cart3")));
+};
+

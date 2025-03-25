@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import Brands from "./Brands";
 
-export default function Games({ error, data, loading, onGameClick }) {
+export default function Games({ error, data, loading, onGameClick, onAddToCartClick}) {
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
 
@@ -19,7 +19,10 @@ export default function Games({ error, data, loading, onGameClick }) {
                             <img src={game.background_image} alt={game.name} className="game-bg" />
                             <div className="infos">
                                 <div className="cart">
-                                    <button className="addToCart">Add to cart +</button>
+                                    <button onClick={() => {
+                                        onAddToCartClick(game ,game.name, hashStringToNumber(game.name), game.background_image)
+                                        console.log("i supposed to be there for me ")
+                                        }} className="addToCart">Add to cart +</button>
                                     <h3>{hashStringToNumber(game.name) + " $"}</h3>
                                 </div>
                                 <div className="save">

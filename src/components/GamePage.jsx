@@ -5,6 +5,7 @@ import { faStar, faEye, faEyeSlash, faArrowLeft } from "@fortawesome/free-solid-
 import './styles/gamePage.css'
 import Brands from './Brands';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { addItemToCart } from './Shop';
 
 export default function GamePage() {
     const { gameID } = useParams();
@@ -35,7 +36,7 @@ export default function GamePage() {
         ])
         .then(([gameData, screenshotsData]) => {
             setGame(gameData);
-            console.log("the game data is ", gameData)
+            // console.log("the game data is ", gameData)
             setImageURL(gameData.background_image);
             setGameScreenShots(screenshotsData.results);
         })
@@ -134,7 +135,10 @@ export default function GamePage() {
                                 </div>
                                 <div className="add-to">
                                     <button className='wish'>Add to wish list</button>
-                                    <button className='cart-btn'>Add to cart</button>
+                                    <button className='cart-btn' onClick={() => { 
+                                        addItemToCart(game.id, game.name, shopState.price, imageURL)
+                                        console.log("i think youve added it from inside ")
+                                        }}>Add to cart</button>
                                 </div>
                             </div>
                             <div className="gameplay-shots">
