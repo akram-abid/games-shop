@@ -1,7 +1,7 @@
 import './App.css'
 import MainBackground from "./components/MainBackground"
 import IntroMain from './components/IntroMain';
-import Shop from './components/Shop';
+import Cart from './components/Cart';
 
 function App() {
   return (

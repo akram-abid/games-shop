@@ -1,5 +1,4 @@
 import './styles/shop.css'
-import Header from './Header';
 import { useEffect, useState} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
@@ -49,9 +48,16 @@ export default function Shop(){
         localStorage.setItem('shopTitle', title);
         localStorage.setItem('shopPageNumber', pageNumber.toString());
         localStorage.setItem('shopUrl', url);
-
+    
         const urlSafeTitle = title.toLowerCase().replace(/\s+/g, '-');
         navigate(`/shop/${urlSafeTitle}`, { replace: true });
+    
+        const clearStorage = () => localStorage.removeItem('shopPageNumber');
+        window.addEventListener("beforeunload", clearStorage);
+    
+        return () => {
+            window.removeEventListener("beforeunload", clearStorage);
+        };
     }, [title, pageNumber, url, navigate]);
 
     useEffect(() => {
@@ -95,13 +101,14 @@ export default function Shop(){
         };
     }, [pageNumber, url]);
 
-    const navigateToGame = (gameId) => {
+    const navigateToGame = (gameId, price) => {
         navigate(`/game/${gameId}`, { 
             state: { 
                 shopState: { 
                     title, 
                     pageNumber, 
-                    url 
+                    url,
+                    price 
                 } 
             } 
         });
@@ -125,7 +132,7 @@ export default function Shop(){
 
     return( 
         <>
-            <Header />
+            {/* <Header /> */}
             <div className="shop-content">
                 <div className="nav-bar">
                     <div className="categs-section">

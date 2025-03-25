@@ -2,11 +2,14 @@
     width: 100%;
     justify-content: space-between;
     display: flex;
-    padding: 8px 8px 0px 8px;
-    backdrop-filter: blur(3px);
+    padding: 12px;
+    backdrop-filter: blur(4px);
+    background-color: #00000059;
     z-index: 13;
+    position: absolute;
     padding: 8px;
     align-items: center;
+    height: 60px;
   }
   
   .logo {
@@ -41,7 +44,7 @@
   }
   
   .search-input {
-    font-size: 19px;
+    font-size: 16px;
     padding: 4px 0px;
     background-color: transparent;
     border: none;

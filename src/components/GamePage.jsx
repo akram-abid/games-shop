@@ -97,7 +97,7 @@ export default function GamePage() {
     return(
         <>
             <div className="game-page">
-                <Header />
+                {/* <Header /> */}
                 <img src={imageURL} alt="" />
                 <div className="blur-layer"></div>
                 <div className="faded"></div>
@@ -121,13 +121,16 @@ export default function GamePage() {
                                 <Brands game={game}/>
                                 <p className='game-discribtion'>{ getFirstParagraph(game.description_raw) }</p>
                                 <p>publisher: <b>{game.publishers[0].name}</b></p>
-                                <p>relaesed in: <b></p>{game.released}</b></p>
-                                <div className="game-rating">
-                                    <FontAwesomeIcon icon={faStar} color='yellow' size='2x'/>
-                                    <div className='rating'>
-                                        <h3>Rating</h3>
-                                        <h2>{game.rating} /5</h2>
+                                <p>relaesed in: <b>{game.released}</b></p>
+                                <div className="important">
+                                    <div className="game-rating">
+                                        <FontAwesomeIcon icon={faStar} color='yellow' size='2x'/>
+                                        <div className='rating'>
+                                            <h3>Rating</h3>
+                                            <h2>{game.rating} /5</h2>
+                                        </div>
                                     </div>
+                                    <p>price: <b style={{fontSize: "28px"}}>{ shopState.price } $</b></p>
                                 </div>
                                 <div className="add-to">
                                     <button className='wish'>Add to wish list</button>

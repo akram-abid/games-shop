@@ -28,7 +28,7 @@ export default function IntroMain() {
 
     return(
         <>
-          <Header />
+          {/* <Header /> */}
           <div className="mainBody">
             <div className="mainContent">
               <div className="intro">

@@ -13,7 +13,7 @@ export default function Games({ error, data, loading, onGameClick }) {
                     <div 
                         className="game" 
                         key={game.id} 
-                        onClick={() => onGameClick(game.id)}
+                        onClick={() => onGameClick(game.id, hashStringToNumber(game.name))}
                     >
                         <div className="game-content">
                             <img src={game.background_image} alt={game.name} className="game-bg" />

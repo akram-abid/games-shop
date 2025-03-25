@@ -8,7 +8,7 @@
     width: 100%;
     height: calc(100vh - 20px);
     margin-top: 8px;
-    padding: 0 0 0 12px;
+    padding: 60px 0 0 12px;
     overflow: hidden;
 }
 
@@ -91,7 +91,7 @@
 
 .infos {
     background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(5px);
     flex: 0.8;
     display: flex;
     flex-direction: column;
