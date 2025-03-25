@@ -11,11 +11,7 @@ export default function Cart({ toggleCart }) {
         
         window.location.reload();
     };
-    
-    const totalPrice = cartItems.reduce((sum, item) => {
-        console.log("the type ", typeof(item.price))
-        sum + item.price
-    });
+
     console.log("just see this ", Array.isArray(cartItems));
 
     return (
@@ -39,9 +35,6 @@ export default function Cart({ toggleCart }) {
                             </button>
                         </div>
                     ))}
-                </div>
-                <div className='total'>
-                    <h3>Total {`${totalPrice}`}</h3>
                 </div>
             </div>
         </>
