@@ -1,36 +1,66 @@
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faEye, faEyeSlash, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import './styles/gamePage.css'
 import Brands from './Brands';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
-export default function GamePage({gameID, gameScreenShots}) {
-        
+export default function GamePage() {
+    const { gameID } = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const [imageURL, setImageURL] = useState("")
+    const [gameScreenShots, setGameScreenShots] = useState([])
     const [game, setGame] = useState({})
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     const [contentVisible, setContentVisible] = useState(true)
 
-    useEffect(( ) => {
-        fetch(`https://api.rawg.io/api/games/${gameID}?key=c81c9ad475874d0694d4bd9a64b5bb6a`, {mode: 'cors'})
-            .then((response) => { 
-                if (response.status >= 400) {
-                    throw new Error("server error");
-                }
-                return response.json()
-            })
-            .then((response) => {
-                console.log("the data of the game ", response)
-                setImageURL(response.background_image)
-                console.log("i wil set this image ", imageURL, response.background_image)
-                setGame(response)
-                setLoading(false)
-            })
-            .catch((error) => setError(error))
-            .finally(() => setLoading(false));
-        }, [gameID])
+    useEffect(() => {
+        setLoading(true);
+        
+        Promise.all([
+            fetch(`https://api.rawg.io/api/games/${gameID}?key=c81c9ad475874d0694d4bd9a64b5bb6a`, {mode: 'cors'})
+                .then(response => {
+                    if (response.status >= 400) throw new Error("server error");
+                    return response.json();
+                }),
+            fetch(`https://api.rawg.io/api/games/${gameID}/screenshots?key=c81c9ad475874d0694d4bd9a64b5bb6a`, {mode: 'cors'})
+                .then(response => {
+                    if (response.status >= 400) throw new Error("server error");
+                    return response.json();
+                })
+        ])
+        .then(([gameData, screenshotsData]) => {
+            setGame(gameData);
+            console.log("the game data is ", gameData)
+            setImageURL(gameData.background_image);
+            setGameScreenShots(screenshotsData.results);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            setError(error);
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+    }, [gameID]);
+
+    const shopState = location.state?.shopState;
+
+    const navigateBackToShop = () => {
+        if (shopState) {
+            navigate('/shop', { 
+                state: { 
+                    shopState: shopState 
+                } 
+            });
+        } else {
+            navigate('/shop');
+        }
+    };
 
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
@@ -76,6 +106,10 @@ export default function GamePage({gameID, gameScreenShots}) {
                         <img src={imageURL} alt="" />
                         <div className={`horizontall-fade ${contentVisible ? '' : 'transparent'}`}>
                             <div className={`game-infos ${contentVisible ? 'visible' : 'hidden'}`}>
+                                <button onClick={navigateBackToShop} className="back-to-shop">
+                                    <FontAwesomeIcon icon={faArrowLeft} size='1x'/>
+                                    <h3>back to shop</h3>
+                                </button>
                                 <div className='genres-tags'>
                                     {game.genres.map((value) => {
                                         return(
@@ -86,6 +120,8 @@ export default function GamePage({gameID, gameScreenShots}) {
                                 <h1 className='game-title'>{game.name}</h1>
                                 <Brands game={game}/>
                                 <p className='game-discribtion'>{ getFirstParagraph(game.description_raw) }</p>
+                                <p>publisher: <b>{game.publishers[0].name}</b></p>
+                                <p>relaesed in: <b></p>{game.released}</b></p>
                                 <div className="game-rating">
                                     <FontAwesomeIcon icon={faStar} color='yellow' size='2x'/>
                                     <div className='rating'>

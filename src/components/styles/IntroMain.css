@@ -31,6 +31,7 @@
 .intro-title p {
   font-size: 20px;
 }
+
 .shop {
   text-decoration: none;
   color: white;
@@ -130,6 +131,8 @@
 }
 
 .categorie {
+    color: white;
+    text-decoration: none;
     display: flex;
     gap: 16px;
     align-items: center;

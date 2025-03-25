@@ -2,22 +2,70 @@ import './styles/shop.css'
 import Header from './Header';
 import { useEffect, useState} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeftLong, faRightLong,} from "@fortawesome/free-solid-svg-icons";
+import { faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import Games from './Games';
 import { categories, genres } from '../data/data';
-import GamePage from './GamePage';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Shop(){
+    const { categorie } = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const [title, setTitle] = useState("All Games");
-    const [pageNumber, setPageNumber] = useState(1);
+    const [title, setTitle] = useState(() => {
+        const locationState = location.state?.shopState?.title;
+        const storedTitle = localStorage.getItem('shopTitle');
+        return locationState || storedTitle || "All Games";
+    });
+
+    const [pageNumber, setPageNumber] = useState(() => {
+        const locationState = location.state?.shopState?.pageNumber;
+        const storedPageNumber = localStorage.getItem('shopPageNumber');
+        return locationState || parseInt(storedPageNumber) || 1;
+    });
+
     const [maxPageNumber, setMaxPageNumber] = useState(1);
     const [loading, setLoading] = useState(true);
-    const[url , setUrl] = useState (`https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a&page=${pageNumber}`)
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
+    
+    const [url, setUrl] = useState(() => {
+        const locationState = location.state?.shopState?.url;
+        const storedUrl = localStorage.getItem('shopUrl');
+        
+        if (locationState) return locationState;
+        if (storedUrl) return storedUrl;
+
+        if (categorie) {
+            const categoryObj = getCategoryByName(categorie);
+            if (categoryObj) {
+                return categoryObj.url;
+            }
+        }
+        return "https://api.rawg.io/api/games?key=c81c9ad475874d0694d4bd9a64b5bb6a";
+    });
+    
+    useEffect(() => {
+        localStorage.setItem('shopTitle', title);
+        localStorage.setItem('shopPageNumber', pageNumber.toString());
+        localStorage.setItem('shopUrl', url);
+
+        const urlSafeTitle = title.toLowerCase().replace(/\s+/g, '-');
+        navigate(`/shop/${urlSafeTitle}`, { replace: true });
+    }, [title, pageNumber, url, navigate]);
 
     useEffect(() => {
+        const storedPageNumber = localStorage.getItem('shopPageNumber');
+        if (storedPageNumber) {
+            setPageNumber(parseInt(storedPageNumber));
+        }
+    }, []);
+    
+    
+    useEffect(() => {
+        let isMounted = true;
+        setLoading(true);
+        
         fetch(`${url}&page=${pageNumber}`, { mode: "cors" })
             .then((response) => {
                 if (response.status >= 400) {
@@ -26,61 +74,79 @@ export default function Shop(){
                 return response.json();
             })
             .then((response) => {
-                console.log("the original data is ", response)
-                setMaxPageNumber(Math.ceil(response.count/20))
-                setData(response.results);
+                if (isMounted) {
+                    setMaxPageNumber(Math.ceil(response.count/20));
+                    setData(response.results);
+                }
             })
-            .catch((error) => setError(error))
-            .finally(() => setLoading(false));
-    }, [pageNumber, maxPageNumber, url] );
+            .catch((error) => {
+                if (isMounted) {
+                    setError(error);
+                }
+            })
+            .finally(() => {
+                if (isMounted) {
+                    setLoading(false);
+                }
+            });
+            
+        return () => {
+            isMounted = false;
+        };
+    }, [pageNumber, url]);
 
+    const navigateToGame = (gameId) => {
+        navigate(`/game/${gameId}`, { 
+            state: { 
+                shopState: { 
+                    title, 
+                    pageNumber, 
+                    url 
+                } 
+            } 
+        });
+    };
 
     const handleNextPage = () => {
-        setLoading(true)
         setPageNumber((prev) => prev + 1);
     };
 
     const handlePrevPage = () => {
-        setLoading(true)
         setPageNumber((prev) => (prev > 1 ? prev - 1 : 1));
     };
 
-    if (loading) return <div className="spinner"></div>;
-    if (error) return <p>A network error was encountered</p>;
+    const updateShopContent = (newTitle, newUrl) => {
+        setTitle(newTitle);
+        setUrl(newUrl);
+        setPageNumber(1);
+    };
 
-    // return(
-    //     <GamePage gameID={data[16].id} gameScreenShots={data[16].short_screenshots}/>
-    // );
+    if (error) return <p>A network error was encountered</p>;
 
     return( 
         <>
-            { <Header /> }
+            <Header />
             <div className="shop-content">
                 <div className="nav-bar">
                     <div className="categs-section">
                         { categories.map( value => { return (
-                            <div className="categ" key={value.name} onClick={ () => {
-                                setLoading(true)
-                                setPageNumber(1)
-                                setTitle(value.name)
-                                setUrl(`${value.url}`)
-                                } }>
+                            <div 
+                                className="categ" key={value.name} onClick={ () => updateShopContent(value.name, value.url) }>
                                 <FontAwesomeIcon icon={value.icon} size='2x'/>
                                 <h2>{ value.name }</h2>
                             </div>
                         )}) }
                     </div>
                     <div className="genres-section">
-                        <h3>Genrs</h3>
+                        <h3>Genres</h3>
                         <div className="genres">
                             {genres.map((value) => {
                                 return(
-                                <div className="gener" key={value.name} onClick={ () => {
-                                    setLoading(true)
-                                    setUrl(`${value.url}`)
-                                    setTitle(value.name)
-                                    setPageNumber(1)
-                                    } }>
+                                <div 
+                                    className="gener" 
+                                    key={value.name} 
+                                    onClick={ () => updateShopContent(value.name, value.url) }
+                                >
                                     <FontAwesomeIcon icon={value.icon} size='2x'/>
                                     <h2>{ value.name }</h2>
                                 </div>
@@ -90,19 +156,41 @@ export default function Shop(){
                     </div>
                 </div>
                 <div className="games-layout">
-                    <h1>{title}</h1>
-                    <Games url={url} loading={loading} maxPageNumber={maxPageNumber} pageNumber={pageNumber} setLoading={setLoading} setMaxPageNumber={setMaxPageNumber} data={data} error={error} />
-                    <div className="page">
-                        <button onClick={handlePrevPage} disabled={pageNumber === 1} >
-                            <FontAwesomeIcon icon={faLeftLong} />
-                        </button>
-                        <h3>{pageNumber} / {maxPageNumber}</h3>
-                        <button onClick={handleNextPage}>
-                            <FontAwesomeIcon icon={faRightLong} disabled={pageNumber === maxPageNumber} />
-                        </button>
-                     </div>
+                    {loading ? (
+                        <div className="spinner"></div>
+                    ) : (
+                        <>
+                            <h1>{title}</h1>
+                            <Games 
+                                url={url} 
+                                loading={loading} 
+                                maxPageNumber={maxPageNumber} 
+                                pageNumber={pageNumber} 
+                                setLoading={setLoading} 
+                                setMaxPageNumber={setMaxPageNumber} 
+                                data={data} 
+                                error={error} 
+                                onGameClick={navigateToGame}
+                            />
+                            <div className="page">
+                                <button onClick={handlePrevPage} disabled={pageNumber === 1} >
+                                    <FontAwesomeIcon icon={faLeftLong} />
+                                </button>
+                                <h3>{pageNumber} / {maxPageNumber}</h3>
+                                <button onClick={handleNextPage} disabled={pageNumber === maxPageNumber}>
+                                    <FontAwesomeIcon icon={faRightLong} />
+                                </button>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </>
+    );
+}
+
+function getCategoryByName(name) {
+    return [...categories, ...genres].find(category => 
+        category.name.toLowerCase().replace(/\s+/g, '-') === name
     );
 }

@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import Brands from "./Brands";
 
-export default function Games({ error, data, loading, setLoading, pageNumber, maxPageNumber, setMaxPageNumber , url}) {
-
+export default function Games({ error, data, loading, onGameClick }) {
     if (loading) return <div className="spinner"></div>;
     if (error) return <p>A network error was encountered</p>;
 
@@ -12,7 +10,11 @@ export default function Games({ error, data, loading, setLoading, pageNumber, ma
         <>
             <div className="games">
                 {data.map((game) => (
-                    <Link className="game" key={game.id}>
+                    <div 
+                        className="game" 
+                        key={game.id} 
+                        onClick={() => onGameClick(game.id)}
+                    >
                         <div className="game-content">
                             <img src={game.background_image} alt={game.name} className="game-bg" />
                             <div className="infos">
@@ -27,7 +29,7 @@ export default function Games({ error, data, loading, setLoading, pageNumber, ma
                                 <h2>{game.name}</h2>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 ))}
             </div>
         </>

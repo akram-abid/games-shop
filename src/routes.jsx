@@ -1,7 +1,6 @@
-import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Shop from "./components/Shop";
+import GamePage from "./components/GamePage";
 
 const routes = [
     {
@@ -12,6 +11,14 @@ const routes = [
         path: "shop",
         element: <Shop />
     },
+    {
+        path: "shop/:categorie",
+        element: <Shop />
+    },
+    {
+        path: "game/:gameID",
+        element: <GamePage />
+    }
 ]
 
 export default routes;
